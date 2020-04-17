@@ -74,7 +74,7 @@ public class Main {
 
         printSeparator();
 
-        dao.deleteUser(users.get(2));
+        dao.deleteUser(users.get(0));
     }
 
     public static List<Discipline> disciplineFactory(List<User> members, User user) {

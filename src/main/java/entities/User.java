@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
@@ -35,7 +37,6 @@ public class User {
     @Column(unique = true)
     private String username;
 
-
     private Date createdDate;
 
     @Column(columnDefinition = "bool default true")
@@ -46,6 +47,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Roles> roles;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
