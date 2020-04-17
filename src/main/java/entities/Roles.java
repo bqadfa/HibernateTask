@@ -2,6 +2,7 @@ package entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE Roles SET enabled = NOT enabled where id = ?")
 public class Roles {
 
     @Id
@@ -19,6 +21,9 @@ public class Roles {
 
     @Column
     private String nameOfRole;
+
+    @Column(columnDefinition = "bool default true")
+    private Boolean enabled;
 
     /*@ManyToMany
     private Set<User> users;*/
